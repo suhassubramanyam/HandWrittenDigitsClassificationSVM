@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.io import loadmat
 from scipy.optimize import minimize
+from sklearn.svm import SVC
 
 
 def preprocess():
@@ -114,22 +115,38 @@ def blrObjFunction(initialWeights, *args):
     # YOUR CODE HERE #
     ##################
     # HINT: Do not forget to add the bias term to your input data
+    ones_column = np.ones((train_data.shape[0], 1))
+    train_data = np.column_stack([ones_column, train_data])  # Add bias in the beginning of the vector
+
+
+    theta = sigmoid(np.dot(train_data, initialWeights))
+    theta = theta.reshape(theta.shape[0], 1)
+
+    one_classifier = np.multiply(labeli, np.log(theta))
+    zero_classifer = np.multiply(1 - labeli, np.log(1 - theta))
+
+    summation_term = one_classifier + zero_classifer
+    error = -(np.sum(summation_term)) / n_data
+
+    theta_minus_y = theta - labeli
+    grad_summation_term = train_data * theta_minus_y
+    error_grad = (np.sum(grad_summation_term, axis=0)) / n_train
 
     return error, error_grad
 
 
 def blrPredict(W, data):
     """
-     blrObjFunction predicts the label of data given the data and parameter W 
+     blrObjFunction predicts the label of data given the data and parameter W
      of Logistic Regression
-     
+
      Input:
-         W: the matrix of weight of size (D + 1) x 10. Each column is the weight 
+         W: the matrix of weight of size (D + 1) x 10. Each column is the weight
          vector of a Logistic Regression classifier.
          X: the data matrix of size N x D
-         
-     Output: 
-         label: vector of size N x 1 representing the predicted label of 
+
+     Output:
+         label: vector of size N x 1 representing the predicted label of
          corresponding feature vector given in data matrix
 
     """
@@ -140,6 +157,10 @@ def blrPredict(W, data):
     ##################
     # HINT: Do not forget to add the bias term to your input data
 
+    ones_column = np.ones((data.shape[0], 1))
+    X = np.column_stack([ones_column, data])  # Add bias in the beginning of the vector
+    op = sigmoid(np.dot(X, W))
+    label = np.argmax(op, axis=1)
     return label
 
 
@@ -202,6 +223,10 @@ Script for Logistic Regression
 """
 train_data, train_label, validation_data, validation_label, test_data, test_label = preprocess()
 
+train_label = train_label.ravel()
+validation_label = validation_label.ravel()
+test_label = test_label.ravel()
+
 # number of classes
 n_class = 10
 
@@ -245,6 +270,74 @@ print('\n\n--------------SVM-------------------\n\n')
 ##################
 # YOUR CODE HERE #
 ##################
+
+print("--------Using linear kernel----------")
+clf = SVC(kernel='linear')
+
+clf.fit(train_data, train_label)
+predicted_label = clf.predict(train_data)
+print('\n Training set Accuracy:' + str(100 * np.mean((predicted_label == train_label).astype(float))) + '%')
+
+clf.fit(validation_data, validation_label)
+predicted_label = clf.predict(validation_data)
+print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label == validation_label).astype(float))) + '%')
+
+clf.fit(test_data, test_label)
+predicted_label = clf.predict(test_data)
+print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label).astype(float))) + '%')
+
+
+
+print("--------Using radial basis function with value of gamma setting to 1----------")
+clf = SVC(gamma=1.0)
+
+clf.fit(train_data, train_label)
+predicted_label = clf.predict(train_data)
+print('\n Training set Accuracy:' + str(100 * np.mean((predicted_label == train_label).astype(float))) + '%')
+
+clf.fit(validation_data, validation_label)
+predicted_label = clf.predict(validation_data)
+print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label == validation_label).astype(float))) + '%')
+
+clf.fit(test_data, test_label)
+predicted_label = clf.predict(test_data)
+print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label).astype(float))) + '%')
+
+
+
+print("--------Using radial basis function with value of gamma setting to default----------")
+clf = SVC()
+
+clf.fit(train_data, train_label)
+predicted_label = clf.predict(train_data)
+print('\n Training set Accuracy:' + str(100 * np.mean((predicted_label == train_label).astype(float))) + '%')
+
+clf.fit(validation_data, validation_label)
+predicted_label = clf.predict(validation_data)
+print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label == validation_label).astype(float))) + '%')
+
+clf.fit(test_data, test_label)
+predicted_label = clf.predict(test_data)
+print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label).astype(float))) + '%')
+
+
+
+for i in range(1,11):
+    print("--------Using radial basis function with value of gamma setting to default for C: ",i)
+    clf = SVC(C=i*10)
+
+    clf.fit(train_data, train_label)
+    predicted_label = clf.predict(train_data)
+    print('\n Training set Accuracy:' + str(100 * np.mean((predicted_label == train_label).astype(float))) + '%')
+
+    clf.fit(validation_data, validation_label)
+    predicted_label = clf.predict(validation_data)
+    print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label == validation_label).astype(float))) + '%')
+
+    clf.fit(test_data, test_label)
+    predicted_label = clf.predict(test_data)
+    print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label).astype(float))) + '%')
+
 
 
 """
