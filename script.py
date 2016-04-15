@@ -172,7 +172,7 @@ def mlrObjFunction(params, *args):
     Input:
         initialWeights: the weight vector of size (D + 1) x 1
         train_data: the data matrix of size N x D
-        labeli: the label vector of size N x 1 where each entry can be either 0 or 1
+        Y: the label vector of size N x 1 where each entry can be either 0 or 1
                 representing the label of corresponding feature vector
 
     Output:
@@ -180,17 +180,39 @@ def mlrObjFunction(params, *args):
         error_grad: the vector of size (D+1) x 10 representing the gradient of
                     error function
     """
-    n_data = train_data.shape[0]
-    n_feature = train_data.shape[1]
-    error = 0
-    error_grad = np.zeros((n_feature + 1, n_class))
+
 
     ##################
     # YOUR CODE HERE #
     ##################
     # HINT: Do not forget to add the bias term to your input data
+    X, Y = args
+    W = params
+    n_data = X.shape[0]
+    n_feature = X.shape[1]
+    K = Y.shape[1]
+    W = np.array(W).reshape((W.size/K, K))
+    error = 0
+    error_grad = np.zeros((n_feature + 1, n_class))
 
-    return error, error_grad
+    ones_column = np.ones((X.shape[0], 1))
+    X = np.column_stack([ones_column, X])  # Add bias in the beginning of the vector
+
+
+    w_transpose_x = np.dot(X, W)
+    print("w_transpose_x: ",w_transpose_x)
+    p_mat = np.exp(w_transpose_x)
+    sum_p_mat = np.sum(p_mat, axis=1)
+    for i in range(sum_p_mat.shape[0]):
+        p_mat[i,:] = p_mat[i,:]/sum_p_mat[i]
+
+    log_theta = np.log(p_mat)
+    summation_term = np.multiply(Y, log_theta)
+    error = - np.sum(summation_term)
+
+    error_grad = np.dot(X.T,p_mat-Y)
+    print("error: ",error)
+    return error, error_grad.ravel()
 
 
 def mlrPredict(W, data):
@@ -214,6 +236,10 @@ def mlrPredict(W, data):
     # YOUR CODE HERE #
     ##################
     # HINT: Do not forget to add the bias term to your input data
+    ones_column = np.ones((data.shape[0], 1))
+    X = np.column_stack([ones_column, data])  # Add bias in the beginning of the vector
+    op = sigmoid(np.dot(X, W))
+    label = np.argmax(op, axis=1)
 
     return label
 
@@ -337,7 +363,6 @@ for i in range(1,11):
     clf.fit(test_data, test_label)
     predicted_label = clf.predict(test_data)
     print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label).astype(float))) + '%')
-
 
 
 """
