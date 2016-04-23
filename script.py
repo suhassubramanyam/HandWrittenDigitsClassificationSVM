@@ -88,7 +88,6 @@ def preprocess():
 def sigmoid(z):
     return 1.0 / (1.0 + np.exp(-z))
 
-
 def blrObjFunction(initialWeights, *args):
     """
     blrObjFunction computes 2-class Logistic Regression error function and
@@ -121,7 +120,6 @@ def blrObjFunction(initialWeights, *args):
 
     theta = sigmoid(np.dot(train_data, initialWeights))
     theta = theta.reshape(theta.shape[0], 1)
-
     one_classifier = np.multiply(labeli, np.log(theta))
     zero_classifer = np.multiply(1 - labeli, np.log(1 - theta))
 
@@ -130,7 +128,7 @@ def blrObjFunction(initialWeights, *args):
 
     theta_minus_y = theta - labeli
     grad_summation_term = train_data * theta_minus_y
-    error_grad = (np.sum(grad_summation_term, axis=0)) / n_train
+    error_grad = (np.sum(grad_summation_term, axis=0)) / n_data
 
     return error, error_grad
 
@@ -161,6 +159,7 @@ def blrPredict(W, data):
     X = np.column_stack([ones_column, data])  # Add bias in the beginning of the vector
     op = sigmoid(np.dot(X, W))
     label = np.argmax(op, axis=1)
+    label = label.reshape(label.size,1)
     return label
 
 
@@ -187,31 +186,31 @@ def mlrObjFunction(params, *args):
     ##################
     # HINT: Do not forget to add the bias term to your input data
     X, Y = args
+
     W = params
     n_data = X.shape[0]
     n_feature = X.shape[1]
     K = Y.shape[1]
     W = np.array(W).reshape((W.size/K, K))
     error = 0
-    error_grad = np.zeros((n_feature + 1, n_class))
+    error_grad = np.zeros((n_feature + 1, K))
 
     ones_column = np.ones((X.shape[0], 1))
     X = np.column_stack([ones_column, X])  # Add bias in the beginning of the vector
 
-
     w_transpose_x = np.dot(X, W)
-    print("w_transpose_x: ",w_transpose_x)
+
     p_mat = np.exp(w_transpose_x)
     sum_p_mat = np.sum(p_mat, axis=1)
+
     for i in range(sum_p_mat.shape[0]):
         p_mat[i,:] = p_mat[i,:]/sum_p_mat[i]
 
     log_theta = np.log(p_mat)
     summation_term = np.multiply(Y, log_theta)
-    error = - np.sum(summation_term)
+    error = - np.sum(summation_term)/n_data
 
-    error_grad = np.dot(X.T,p_mat-Y)
-    print("error: ",error)
+    error_grad = np.dot(X.T, p_mat-Y)/n_data
     return error, error_grad.ravel()
 
 
@@ -240,6 +239,7 @@ def mlrPredict(W, data):
     X = np.column_stack([ones_column, data])  # Add bias in the beginning of the vector
     op = sigmoid(np.dot(X, W))
     label = np.argmax(op, axis=1)
+    label = label.reshape(label.size,1)
 
     return label
 
@@ -248,10 +248,6 @@ def mlrPredict(W, data):
 Script for Logistic Regression
 """
 train_data, train_label, validation_data, validation_label, test_data, test_label = preprocess()
-
-train_label = train_label.ravel()
-validation_label = validation_label.ravel()
-test_label = test_label.ravel()
 
 # number of classes
 n_class = 10
@@ -265,6 +261,8 @@ n_feature = train_data.shape[1]
 Y = np.zeros((n_train, n_class))
 for i in range(n_class):
     Y[:, i] = (train_label == i).astype(int).ravel()
+
+
 
 # Logistic Regression with Gradient Descent
 W = np.zeros((n_feature + 1, n_class))
@@ -287,6 +285,7 @@ print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label == vali
 # Find the accuracy on Testing Dataset
 predicted_label = blrPredict(W, test_data)
 print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label).astype(float))) + '%')
+
 
 """
 Script for Support Vector Machine
