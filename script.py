@@ -299,51 +299,48 @@ print('\n\n--------------SVM-------------------\n\n')
 print("--------Using linear kernel----------")
 clf = SVC(kernel='linear')
 
-clf.fit(train_data, train_label)
+clf.fit(train_data, train_label.ravel())
+
 predicted_label = clf.predict(train_data)
-print('\n Training set Accuracy:' + str(100 * np.mean((predicted_label == train_label).astype(float))) + '%')
+print('\n Training set Accuracy:' + str(100 * np.mean((predicted_label == train_label.ravel()).astype(float))) + '%')
 
-clf.fit(validation_data, validation_label)
 predicted_label = clf.predict(validation_data)
-print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label == validation_label).astype(float))) + '%')
+print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label == validation_label.ravel()).astype(float))) + '%')
 
-clf.fit(test_data, test_label)
 predicted_label = clf.predict(test_data)
-print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label).astype(float))) + '%')
+print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label.ravel()).astype(float))) + '%')
 
 
 
 print("--------Using radial basis function with value of gamma setting to 1----------")
 clf = SVC(gamma=1.0)
 
-clf.fit(train_data, train_label)
+clf.fit(train_data, train_label.ravel())
+
 predicted_label = clf.predict(train_data)
-print('\n Training set Accuracy:' + str(100 * np.mean((predicted_label == train_label).astype(float))) + '%')
+print('\n Training set Accuracy:' + str(100 * np.mean((predicted_label == train_label.ravel()).astype(float))) + '%')
 
-clf.fit(validation_data, validation_label)
 predicted_label = clf.predict(validation_data)
-print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label == validation_label).astype(float))) + '%')
+print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label == validation_label.ravel()).astype(float))) + '%')
 
-clf.fit(test_data, test_label)
 predicted_label = clf.predict(test_data)
-print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label).astype(float))) + '%')
+print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label.ravel()).astype(float))) + '%')
 
 
 
 print("--------Using radial basis function with value of gamma setting to default----------")
 clf = SVC()
 
-clf.fit(train_data, train_label)
+clf.fit(train_data, train_label.ravel())
+
 predicted_label = clf.predict(train_data)
-print('\n Training set Accuracy:' + str(100 * np.mean((predicted_label == train_label).astype(float))) + '%')
+print('\n Training set Accuracy:' + str(100 * np.mean((predicted_label == train_label.ravel()).astype(float))) + '%')
 
-clf.fit(validation_data, validation_label)
 predicted_label = clf.predict(validation_data)
-print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label == validation_label).astype(float))) + '%')
+print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label == validation_label.ravel()).astype(float))) + '%')
 
-clf.fit(test_data, test_label)
 predicted_label = clf.predict(test_data)
-print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label).astype(float))) + '%')
+print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label.ravel()).astype(float))) + '%')
 
 
 
@@ -351,17 +348,16 @@ for i in range(1,11):
     print("--------Using radial basis function with value of gamma setting to default for C: ",i)
     clf = SVC(C=i*10)
 
-    clf.fit(train_data, train_label)
+    clf.fit(train_data, train_label.ravel())
+
     predicted_label = clf.predict(train_data)
-    print('\n Training set Accuracy:' + str(100 * np.mean((predicted_label == train_label).astype(float))) + '%')
+    print('\n Training set Accuracy:' + str(100 * np.mean((predicted_label == train_label.ravel()).astype(float))) + '%')
 
-    clf.fit(validation_data, validation_label)
     predicted_label = clf.predict(validation_data)
-    print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label == validation_label).astype(float))) + '%')
+    print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label == validation_label.ravel()).astype(float))) + '%')
 
-    clf.fit(test_data, test_label)
     predicted_label = clf.predict(test_data)
-    print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label).astype(float))) + '%')
+    print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label.ravel()).astype(float))) + '%')
 
 
 """
