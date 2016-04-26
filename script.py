@@ -287,7 +287,8 @@ print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label == vali
 predicted_label = blrPredict(W, test_data)
 print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label).astype(float))) + '%')
 
-pickle.dump(W,open("params.pickle","wb"))
+with open('params.pickle', 'wb') as f1:
+    pickle.dump(W, f1)
 
 """
 Script for Support Vector Machine
@@ -388,3 +389,6 @@ print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label_b == va
 # Find the accuracy on Testing Dataset
 predicted_label_b = mlrPredict(W_b, test_data)
 print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label_b == test_label).astype(float))) + '%')
+
+with open('params_bonus.pickle', 'wb') as f2:
+    pickle.dump(W_b, f2)
