@@ -347,20 +347,20 @@ print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_la
 
 
 
-for i in range(1,11):
+for i in list([1,10,20,30,40,50,60,70,80,90,100]):
     print("--------Using radial basis function with value of gamma setting to default for C: ",i)
-    clf = SVC(C=i*10)
+    clf = SVC(C=i)
 
     clf.fit(train_data, train_label_svc)
 
     predicted_label = clf.predict(train_data)
-    print('\n Training set Accuracy:' + str(100 * np.mean((predicted_label == train_label_svc).astype(float))) + '%')
+    print('\nC: '+ str(i) +', Training set Accuracy:' + str(100 * np.mean((predicted_label == train_label_svc).astype(float))) + '%')
 
     predicted_label = clf.predict(validation_data)
-    print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label == validation_label_svc).astype(float))) + '%')
+    print('\nC: '+ str(i) +', Validation set Accuracy:' + str(100 * np.mean((predicted_label == validation_label_svc).astype(float))) + '%')
 
     predicted_label = clf.predict(test_data)
-    print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label_svc).astype(float))) + '%')
+    print('\nC: '+ str(i) +', Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label_svc).astype(float))) + '%')
 
 
 """
