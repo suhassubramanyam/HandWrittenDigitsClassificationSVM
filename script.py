@@ -2,6 +2,7 @@ import numpy as np
 from scipy.io import loadmat
 from scipy.optimize import minimize
 from sklearn.svm import SVC
+import pickle
 
 
 def preprocess():
@@ -267,7 +268,7 @@ for i in range(n_class):
 # Logistic Regression with Gradient Descent
 W = np.zeros((n_feature + 1, n_class))
 initialWeights = np.zeros((n_feature + 1, 1))
-opts = {'maxiter': 100}
+opts = {'maxiter': 1}
 for i in range(n_class):
     labeli = Y[:, i].reshape(n_train, 1)
     args = (train_data, labeli)
@@ -286,6 +287,7 @@ print('\n Validation set Accuracy:' + str(100 * np.mean((predicted_label == vali
 predicted_label = blrPredict(W, test_data)
 print('\n Testing set Accuracy:' + str(100 * np.mean((predicted_label == test_label).astype(float))) + '%')
 
+pickle.dump(W,open("params.pickle","wb"))
 
 """
 Script for Support Vector Machine
