@@ -13,96 +13,103 @@
 
  Training set Accuracy:97.286%
 
- Validation set Accuracy:99.69%
+ Validation set Accuracy:93.64%
 
- Testing set Accuracy:99.89%
+ Testing set Accuracy:93.78%
 --------Using radial basis function with value of gamma setting to 1----------
 
  Training set Accuracy:100.0%
 
- Validation set Accuracy:100.0%
+ Validation set Accuracy:15.48%
 
- Testing set Accuracy:100.0%
+ Testing set Accuracy:17.14%
 --------Using radial basis function with value of gamma setting to default----------
 
  Training set Accuracy:94.294%
 
- Validation set Accuracy:93.21%
+ Validation set Accuracy:94.02%
 
- Testing set Accuracy:93.5%
+ Testing set Accuracy:94.42%
 --------Using radial basis function with value of gamma setting to default for C:  1
 
- Training set Accuracy:97.132%
+C: 1, Training set Accuracy:94.294%
 
- Validation set Accuracy:96.66%
+C: 1, Validation set Accuracy:94.02%
 
- Testing set Accuracy:97.08%
---------Using radial basis function with value of gamma setting to default for C:  2
-
- Training set Accuracy:97.952%
-
- Validation set Accuracy:97.9%
-
- Testing set Accuracy:98.16%
---------Using radial basis function with value of gamma setting to default for C:  3
-
- Training set Accuracy:98.372%
-
- Validation set Accuracy:98.53%
-
- Testing set Accuracy:98.84%
---------Using radial basis function with value of gamma setting to default for C:  4
-
- Training set Accuracy:98.706%
-
- Validation set Accuracy:98.98%
-
- Testing set Accuracy:99.29%
---------Using radial basis function with value of gamma setting to default for C:  5
-
- Training set Accuracy:99.002%
-
- Validation set Accuracy:99.26%
-
- Testing set Accuracy:99.52%
---------Using radial basis function with value of gamma setting to default for C:  6
-
- Training set Accuracy:99.196%
-
- Validation set Accuracy:99.46%
-
- Testing set Accuracy:99.65%
---------Using radial basis function with value of gamma setting to default for C:  7
-
- Training set Accuracy:99.34%
-
- Validation set Accuracy:99.54%
-
- Testing set Accuracy:99.77%
---------Using radial basis function with value of gamma setting to default for C:  8
-
- Training set Accuracy:99.438%
-
- Validation set Accuracy:99.67%
-
- Testing set Accuracy:99.86%
---------Using radial basis function with value of gamma setting to default for C:  9
-
- Training set Accuracy:99.542%
-
- Validation set Accuracy:99.73%
-
- Testing set Accuracy:99.91%
+C: 1, Testing set Accuracy:94.42%
 --------Using radial basis function with value of gamma setting to default for C:  10
 
- Training set Accuracy:99.612%
+C: 10, Training set Accuracy:97.132%
 
- Validation set Accuracy:99.75%
+C: 10, Validation set Accuracy:96.18%
 
- Testing set Accuracy:99.94%
+C: 10, Testing set Accuracy:96.1%
+--------Using radial basis function with value of gamma setting to default for C:  20
 
- Training set Accuracy:9.846%
+C: 20, Training set Accuracy:97.952%
 
- Validation set Accuracy:10.0%
+C: 20, Validation set Accuracy:96.9%
 
- Testing set Accuracy:9.8%
+C: 20, Testing set Accuracy:96.67%
+--------Using radial basis function with value of gamma setting to default for C:  30
+
+C: 30, Training set Accuracy:98.372%
+
+C: 30, Validation set Accuracy:97.1%
+
+C: 30, Testing set Accuracy:97.04%
+--------Using radial basis function with value of gamma setting to default for C:  40
+
+C: 40, Training set Accuracy:98.706%
+
+C: 40, Validation set Accuracy:97.23%
+
+C: 40, Testing set Accuracy:97.19%
+--------Using radial basis function with value of gamma setting to default for C:  50
+
+C: 50, Training set Accuracy:99.002%
+
+C: 50, Validation set Accuracy:97.31%
+
+C: 50, Testing set Accuracy:97.19%
+--------Using radial basis function with value of gamma setting to default for C:  60
+
+C: 60, Training set Accuracy:99.196%
+
+C: 60, Validation set Accuracy:97.38%
+
+C: 60, Testing set Accuracy:97.16%
+--------Using radial basis function with value of gamma setting to default for C:  70
+
+C: 70, Training set Accuracy:99.34%
+
+C: 70, Validation set Accuracy:97.36%
+
+C: 70, Testing set Accuracy:97.26%
+--------Using radial basis function with value of gamma setting to default for C:  80
+
+C: 80, Training set Accuracy:99.438%
+
+C: 80, Validation set Accuracy:97.39%
+
+C: 80, Testing set Accuracy:97.33%
+--------Using radial basis function with value of gamma setting to default for C:  90
+
+C: 90, Training set Accuracy:99.542%
+
+C: 90, Validation set Accuracy:97.36%
+
+C: 90, Testing set Accuracy:97.34%
+--------Using radial basis function with value of gamma setting to default for C:  100
+
+C: 100, Training set Accuracy:99.612%
+
+C: 100, Validation set Accuracy:97.41%
+
+C: 100, Testing set Accuracy:97.4%
+
+ Training set Accuracy:93.39%
+
+ Validation set Accuracy:92.43%
+
+ Testing set Accuracy:92.67%
